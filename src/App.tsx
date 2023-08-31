@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import MainPage from './pages/main/MainPage';
+import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#5d367a',
+          borderRadius: 2,
+          colorBgContainer: 'transparent',
+          colorTextBase: '#F3F4F6',
+          colorBgLayout: 'green'
+        },
+        components: {
+          Menu: {
+            itemBorderRadius: 8,
+            darkItemBg: 'transparent',
+            darkItemSelectedBg: '#DB2777'
+          },
+          Table: {
+            borderRadius: 16,
+            colorBorder: 'red',
+            colorBorderSecondary:'#5d367a'
+          },
+          Button: {
+            colorBorder: '#4B5563'
+          }
+        },
+      }}
+    >
+    <MainPage />
+    </ConfigProvider>
   );
 }
 

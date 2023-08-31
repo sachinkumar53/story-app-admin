@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Satisfy&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2E0F45, #1C0729);
+}
+
+.transparent-background {
+  background-color: transparent;
+}
+
+.brand-name {
+  font-weight: bold;
+  font-family: 'Satisfy', cursive;
+  font-size: 1.2rem;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-image {
+  border-radius: 50%;
+  height: 24px;
+  aspect-ratio: 1;
+  margin-right: 16px;
+}
+
+.content{
+  margin: 0px 20px;
+  overflow-x: hidden; 
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5b466f;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #412c58;
+}

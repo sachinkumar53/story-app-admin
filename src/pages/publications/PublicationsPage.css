@@ -1,0 +1,26 @@
+.book-card {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-cover {
+    height: 18rem;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: rgb(61, 36, 80);
+}
+.book-title {
+    margin-top: 10px;
+}
+
+.book-author {
+    margin-top: -5px;
+}
+
+.main{
+  overflow-x: hidden; 
+  overflow-y: scroll;
+}
