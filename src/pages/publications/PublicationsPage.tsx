@@ -1,5 +1,5 @@
 import "./PublicationsPage.css"
-import { publicationsRef, usersRef } from "../../components/firebaseConfig";
+import { publicationsRef, usersRef } from "../../firebase/FirebaseApp";
 import { query, orderBy, doc, getDoc, DocumentSnapshot, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Publication } from "./Publication";

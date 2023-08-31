@@ -3,7 +3,6 @@ import "./Main.css";
 import { useState } from "react";
 import SiderMenu, { SiderMenuItem } from "./SiderMenu";
 import RenderContent from "./RenderContent";
-import { AiOutlineLogout } from "react-icons/ai";
 
 const { Header, Sider, Content } = Layout;
 

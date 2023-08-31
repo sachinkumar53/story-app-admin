@@ -1,5 +1,5 @@
-import { usersRef } from "../../components/firebaseConfig"
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { usersRef } from "../../firebase/FirebaseApp"
+import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { useState, useEffect } from "react"
 import { ColumnsType } from "antd/es/table";
 import { Button, Row, Space, Table,Typography } from "antd";

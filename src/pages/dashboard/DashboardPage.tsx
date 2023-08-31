@@ -1,8 +1,8 @@
-import { collection, onSnapshot } from "firebase/firestore"
-import { usersRef, publicationsRef } from "../../components/firebaseConfig"
+import { onSnapshot } from "firebase/firestore"
+import { usersRef, publicationsRef } from "../../firebase/FirebaseApp"
 import { useEffect, useState } from "react"
-import { Card, Col, Row, Space, Statistic, Typography } from "antd";
-const { Text, Title } = Typography;
+import { Card, Col, Row, Statistic, Typography } from "antd";
+//const { Text, Title } = Typography;
 
 function DashboardPage() {
     const [userCount, setUserCount] = useState(0);
