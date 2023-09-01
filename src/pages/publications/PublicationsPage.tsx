@@ -1,64 +1,60 @@
 import "./PublicationsPage.css"
 import { publicationsRef, usersRef } from "../../firebase/FirebaseApp";
-import { query, orderBy, doc, getDoc, DocumentSnapshot, getDocs } from "firebase/firestore";
+import { query, orderBy, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { Publication } from "./Publication";
-import { Card, Col, Row, Typography } from "antd";
+import { Publication } from "../../model/Publication";
+import { Col, Row, Typography } from "antd";
+import { getAuthorNameById } from "../../util/FirestoreDbUtil";
+import StoryCard from "../../components/StoryCard";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
+
+async function getAllPublications(): Promise<Publication[]> {
+    const orderedQuery = query(publicationsRef, orderBy('published_on'));
+    const querySnapshot = await getDocs(orderedQuery);
+
+    const publications = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const authorName: string = await getAuthorNameById(data.author_id);
+            const publication: Publication = {
+                title: data.title,
+                id: data.id,
+                coverUrl: data.cover_url,
+                publishedOn: data.publishedOn,
+                authorId: data.author_id,
+                authorName: authorName
+            }
+            return publication;
+        }));
+
+    return publications;
+}
 
 function PublicationsPage() {
-    const orderedQuery = query(publicationsRef, orderBy('published_on'));
-
     const [publications, setPublications] = useState<Publication[]>([]);
-
-    const getAuthorNameById = async (authorId: string) => {
-        const docRef = doc(usersRef, authorId);
-        const userSnapshot: DocumentSnapshot = await getDoc(docRef);
-        const userData = userSnapshot.data();
-        if (userData !== undefined) {
-            return userData.name;
-        } else {
-            return "unknown";
-        }
-    }
-
     useEffect(() => {
         const fetchData = async () => {
-            const querySnapshot = await getDocs(orderedQuery);
-            const promises = querySnapshot.docs.map(async (doc) => {
-                const data = doc.data();
-                const authorName: string = await getAuthorNameById(data.author_id);
-                const publication: Publication = {
-                    title: data.title,
-                    id: data.id,
-                    coverUrl: data.cover_url,
-                    publishedOn: data.publishedOn,
-                    authorId: data.author_id,
-                    authorName: authorName
-                }
-                return publication;
-            });
-            const publications = await Promise.all(promises);
+            const publications = await getAllPublications();
             setPublications(publications);
         }
         fetchData();
-    }, [orderedQuery]);
+    });
 
     return (
         <div>
-        <Title level={3}>All Publications</Title>
-        <Row className="main" justify={"space-around"} >
-            {publications.map((publication) => (
-                <Col span={4}>
-                    <div className="book-card">
-                        <img className="book-cover" src={publication.coverUrl} alt="Cover" />
-                        <Title className="book-title" level={5}>{publication.title}</Title>
-                        <Text className="book-author" type="secondary">by {publication.authorName}</Text>
-                    </div>
-                </Col>
-            ))}
-        </Row>
+            <Title level={3}>All Publications</Title>
+            <Row className="main" gutter={[16, 16]} justify="start">
+                {publications.map((publication) => (
+                    <Col xs={2} sm={4} md={6} lg={8} xl={4}>
+                        <StoryCard
+                            coverUrl={publication.coverUrl}
+                            title={publication.title}
+                            authorName={publication.authorName}
+                        />
+                    </Col>
+                ))}
+            </Row>
         </div>
     );
 }

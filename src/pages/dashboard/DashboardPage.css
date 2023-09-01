@@ -1,3 +1,4 @@
-
-
-
+.stats-card {
+    border-radius: 16px;
+    border: solid red 2px;
+}

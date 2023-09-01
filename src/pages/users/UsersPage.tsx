@@ -2,13 +2,13 @@ import { usersRef } from "../../firebase/FirebaseApp"
 import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { useState, useEffect } from "react"
 import { ColumnsType } from "antd/es/table";
-import { Button, Row, Space, Table,Typography } from "antd";
+import { Button, Row, Space, Table, Typography } from "antd";
 import User from "./User";
 import { AiOutlineEdit, AiOutlineUserDelete } from "react-icons/ai";
 import "./UsersPage.css";
-const { Text,Title } = Typography;
+const { Title } = Typography;
 
-function UsersTable() {
+export default function UsersPage() {
     const orderedQuery = query(usersRef, orderBy('name'));
 
     const columns: ColumnsType<User> = [
@@ -54,7 +54,7 @@ function UsersTable() {
     const [data, setData] = useState<User[]>([]);
 
     useEffect(() => {
-        onSnapshot(orderedQuery, (querySnapshot) => {
+        const unsubscribe = onSnapshot(orderedQuery, (querySnapshot) => {
             const userList = (querySnapshot.docs.map((doc, index) => {
                 const data = doc.data();
                 return {
@@ -65,6 +65,7 @@ function UsersTable() {
                 };
             }));
             setData(userList);
+            unsubscribe();
         });
     });
 
@@ -72,7 +73,7 @@ function UsersTable() {
         <div>
             <Title level={3}>All Users</Title>
             <Table
-            className="users-table"
+                className="users-table"
                 columns={columns}
                 dataSource={data}
                 bordered={false}
@@ -80,10 +81,3 @@ function UsersTable() {
         </div>
     )
 }
-
-
-function UsersPage() {
-    return <UsersTable />;
-}
-
-export default UsersPage;

@@ -1,5 +1,6 @@
 import DashboardPage from "../dashboard/DashboardPage";
 import PublicationsPage from "../publications/PublicationsPage";
+import ReviewPage from "../reviews/ReviewPage";
 import UsersPage from "../users/UsersPage";
 import { SiderMenuItem } from "./SiderMenu"
 
@@ -18,6 +19,8 @@ function RenderContent({ selectedMenuItem }: RenderContentProps) {
     case "dashboard":
       return <DashboardPage />;
 
+    case "ratings":
+      return <ReviewPage />;
     default:
       return <p style={{ color: 'magenta' }}>{selectedMenuItem} </p>;
   }

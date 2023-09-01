@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.avatar-image {
+    height: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.no-margin{
+    margin: 0;
+    font-weight: bold;
+}

@@ -1,6 +1,6 @@
 import { Layout, Row } from "antd";
 import "./Main.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SiderMenu, { SiderMenuItem } from "./SiderMenu";
 import RenderContent from "./RenderContent";
 
@@ -19,10 +19,10 @@ function HeaderBar() {
 }
 
 
-
+const defaultSelectedMenu = 'dashboard'
 
 function MainPage() {
-  const [selectedMenuItem, setSelectedMenuItem] = useState<SiderMenuItem>('dashboard');
+  const [selectedMenuItem, setSelectedMenuItem] = useState<SiderMenuItem>(defaultSelectedMenu);
 
   const handleMenuItemSelect = (item: SiderMenuItem) => {
     setSelectedMenuItem(item);

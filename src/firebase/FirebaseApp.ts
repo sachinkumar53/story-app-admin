@@ -7,3 +7,4 @@ const db = getFirestore(app);
 
 export const usersRef = collection(db,"users");
 export const publicationsRef = collection(db,"publications");
+export const topRatedStoriesRef = collection(db,"top_rated");
