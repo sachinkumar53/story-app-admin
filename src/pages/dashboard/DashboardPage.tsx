@@ -41,25 +41,27 @@ function DashboardPage() {
     const [topRatedStories, setTopRatedStories] = useState<Publication[]>([]);
 
     useEffect(() => {
-        const unsubscribeUsers = onSnapshot(usersRef, (querySnapshot) => {
-            const count = querySnapshot.docs.length;
+        const fetchUsersCount = async () => {
+            const users = await getDocs(usersRef);
+            const count = users.docs.length;
             setUserCount(count);
-            unsubscribeUsers();
-        });
-        
-        const unsubscribePublications =  onSnapshot(publicationsRef, (querySnapshot) => {
-            const count = querySnapshot.docs.length;
+        };
+
+        const fetchPublicationsCount = async () => {
+            const publications = await getDocs(publicationsRef);
+            const count = publications.docs.length;
             setPublicationCount(count);
-            unsubscribePublications();
-        });
-        
+        };
 
         const fetchTopRatedStories = async () => {
             const topRatedStories = await getTopRatedStories();
             setTopRatedStories(topRatedStories);
         }
+
+        fetchUsersCount();
+        fetchPublicationsCount();
         fetchTopRatedStories();
-    });
+    }, []);
 
     return (
         <div>
@@ -81,7 +83,7 @@ function DashboardPage() {
                     </Card>
                 </Col>
             </Row>
-            <Title level={3} style={{marginTop: 24}}>Top rated</Title>
+            <Title level={3} style={{ marginTop: 24 }}>Top rated</Title>
             <Row gutter={[16, 16]} justify="start">
                 {topRatedStories.map((publication) => (
                     <Col xs={2} sm={4} md={6} lg={8} xl={4}>

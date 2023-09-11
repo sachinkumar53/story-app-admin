@@ -1,5 +1,5 @@
 import { usersRef } from "../../firebase/FirebaseApp"
-import { onSnapshot, orderBy, query } from "firebase/firestore";
+import { getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useState, useEffect } from "react"
 import { ColumnsType } from "antd/es/table";
 import { Button, Row, Space, Table, Typography, Avatar } from "antd";
@@ -49,20 +49,21 @@ export default function UsersPage() {
     const [data, setData] = useState<User[]>([]);
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(orderedQuery, (querySnapshot) => {
-            const userList = (querySnapshot.docs.map((doc, index) => {
-                const data = doc.data();
+        const fetchUsers = async () => {
+            const snapshot = await getDocs(orderedQuery);
+            const userList = snapshot.docs.map(doc => {
+                const data = doc.data()
                 return {
                     uid: data.id,
                     name: data.name,
                     email: data.email,
                     photoUrl: data.photo_url
                 };
-            }));
+            });
             setData(userList);
-            unsubscribe();
-        });
-    });
+        }
+        fetchUsers();
+    }, [orderedQuery]);
 
     return (
         <div>
