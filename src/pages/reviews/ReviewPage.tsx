@@ -1,5 +1,5 @@
 import { Typography, Row, Card, Col, Rate, Button } from "antd";
-import "./ReviewPage.css"
+import "./review.css"
 import { AiOutlineDelete } from "react-icons/ai"
 
 const { Text } = Typography;

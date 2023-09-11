@@ -2,10 +2,10 @@ import { usersRef } from "../../firebase/FirebaseApp"
 import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { useState, useEffect } from "react"
 import { ColumnsType } from "antd/es/table";
-import { Button, Row, Space, Table, Typography } from "antd";
-import User from "./User";
-import { AiOutlineEdit, AiOutlineUserDelete } from "react-icons/ai";
-import "./UsersPage.css";
+import { Button, Row, Space, Table, Typography, Avatar } from "antd";
+import User from "../../model/User";
+import { AiOutlineEdit, AiOutlineUserDelete, AiOutlineUser } from "react-icons/ai";
+import "./users.css";
 const { Title } = Typography;
 
 export default function UsersPage() {
@@ -18,18 +18,13 @@ export default function UsersPage() {
             key: 'name',
             // sorter: (a, b) => a.name.localeCompare(b.name), defaultSortOrder: 'ascend',
             render: (name, key) => {
-                let imgUrl = key.photoUrl;
-
-                if (imgUrl === null || imgUrl.length === 0) {
-                    imgUrl = "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg";
-                }
                 return (
                     <Row align={"middle"}>
-                        <img
-                            className="user-profile-image"
-                            src={imgUrl}
+                        <Avatar
+                            src={key.photoUrl}
                             alt="profile"
-
+                            icon={<AiOutlineUser />}
+                            style={{ marginRight: '10px' }}
                         />
                         <p>{name}</p>
                     </Row>

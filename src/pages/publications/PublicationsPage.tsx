@@ -1,4 +1,4 @@
-import "./PublicationsPage.css"
+import "./publications.css"
 import { publicationsRef, usersRef } from "../../firebase/FirebaseApp";
 import { query, orderBy, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
