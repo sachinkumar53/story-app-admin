@@ -1,16 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore } from 'firebase/firestore';
 import { firebaseConfig } from "./firebaseConfig";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export const auth = getAuth(app);
-const email = "admin@gmail.com";
-const password = "iamadmin";
-
-signInWithEmailAndPassword(auth,email,password);
 
 export const usersRef = collection(db,"users");
 export const publicationsRef = collection(db,"publications");
