@@ -1,4 +1,4 @@
-import { getDocs, onSnapshot, getDoc, doc, DocumentSnapshot, DocumentData } from "firebase/firestore"
+import { getDocs, getDoc, doc, DocumentSnapshot } from "firebase/firestore"
 import { usersRef, publicationsRef, topRatedStoriesRef } from "../../firebase/FirebaseApp"
 import { useEffect, useState } from "react"
 import { Card, Col, Row, Statistic, Typography } from "antd";
@@ -61,6 +61,7 @@ function DashboardPage() {
         fetchUsersCount();
         fetchPublicationsCount();
         fetchTopRatedStories();
+        //console.log("dashboard fetch data");
     }, []);
 
     return (
